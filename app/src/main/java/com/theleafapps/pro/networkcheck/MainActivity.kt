@@ -12,7 +12,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         connectivityLiveData= ConnectivityLiveData(application)
-
-
+        connectivityLiveData.observe(this, Observer {isAvailable->
+            when(isAvailable)
+            {
+                true->textView.text="Connected with Internet"
+                false-> textView.text="No Network"
+            }
+        })
     }
 }

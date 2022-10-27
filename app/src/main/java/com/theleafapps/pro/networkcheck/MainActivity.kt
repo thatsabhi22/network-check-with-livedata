@@ -3,24 +3,24 @@ package com.theleafapps.pro.networkcheck
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import com.theleafapps.pro.networkcheck.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var connectivityLiveData:ConnectivityLiveData
-
+    private lateinit var activityMainBinding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(activityMainBinding.root)
 
         connectivityLiveData= ConnectivityLiveData(application)
         connectivityLiveData.observe(this, Observer {isAvailable->
             when(isAvailable)
             {
-                true->true
-//                true->textView.text="Connected with Internet"
-//                false-> textView.text="No Network"
-                else -> {}
+                true -> activityMainBinding.textView.text = "Connected with Internet"
+                false -> activityMainBinding.textView.text = "No Network"
             }
         })
     }

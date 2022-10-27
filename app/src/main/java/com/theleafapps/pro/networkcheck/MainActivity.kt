@@ -2,10 +2,12 @@ package com.theleafapps.pro.networkcheck
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var connectivityLiveData:ConnectivityLiveData
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,8 +17,10 @@ class MainActivity : AppCompatActivity() {
         connectivityLiveData.observe(this, Observer {isAvailable->
             when(isAvailable)
             {
-                true->textView.text="Connected with Internet"
-                false-> textView.text="No Network"
+                true->true
+//                true->textView.text="Connected with Internet"
+//                false-> textView.text="No Network"
+                else -> {}
             }
         })
     }
